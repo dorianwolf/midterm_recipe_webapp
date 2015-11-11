@@ -3,6 +3,7 @@ class CreateRecipesTable < ActiveRecord::Migration
     create_table :recipes do |t|
       t.string :name
       t.string :link
+      t.timestamps null: false
     end
   end
 end
