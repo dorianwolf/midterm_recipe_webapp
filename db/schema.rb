@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20151111203715) do
 
+
   create_table "ingredients", id: false, force: :cascade do |t|
     t.integer "inventory_id", null: false
     t.integer "recipe_id",    null: false
@@ -22,11 +23,23 @@ ActiveRecord::Schema.define(version: 20151111203715) do
     t.string "name"
   end
 
+  create_table "pantry", id: false, force: :cascade do |t|
+    t.integer "user_id",      null: false
+    t.integer "inventory_id", null: false
+  end
+
   create_table "recipes", force: :cascade do |t|
     t.string   "name"
     t.string   "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end
