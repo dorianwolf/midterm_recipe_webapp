@@ -1,0 +1,19 @@
+<h1>Recipe matches for
+  <% current_user.pantry.each do |ingredient| %>
+  <p><%= ingredient.name %></p>
+  <% end %>
+</h1>
+
+<hr/>
+
+<% @recipies.each do |recipe| %>
+<div class="recipe">
+  <h1>
+    <a href="/recipe/<%= recipe.id %>">
+      <%= recipie.name %></a>
+  </h1>
+  <p>
+    <a href="<%= recipe.link %>">How to</a>
+  </p>
+</div>
+<% end %>
