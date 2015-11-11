@@ -7,47 +7,32 @@ helpers do
 
   def open_pantry
     if logged_in
-      @items_id = Pantry.all.where(user_id: session[:id])
-      @items = []
-      @items_id.each do |item_id|
-        @items << Inventory.find(item_id).name
+      items_id = Pantry.all.where(user_id: session[:id])
+      items = []
+      items_id.each do |item_id|
+        items << Inventory.find(item_id).name
       end
+      items
     end
   end
-end
 
-get '/' do #this is our login page
-  erb :index
-end
+  def pantry_name_to_id(pantry)
+    contents_ids = []
+    pantry.each do |item|
+      contents_ids << Inventory.find_by(name: item).id
+    end
+    contents_ids
+  end
 
-get '/inventory' do
-  @inventory = Inventory.all
-  erb :'/inventory/index'
-end
+  def ingredient_id_to_name(ingredient_ids)
+    ingredient_names = []
+    ingredient_ids.each do |id|
+      ingredient_names << Inventory.find(id).name
+    end
+  end
 
-get '/recipes' do
-  @recipes = Recipe.all
-  erb :'recipes/index'
-end
-
-get 'users/signup' do
-  erb :'users/signup'
-end
-
-get 'inventory' do
-  @items_list = open_pantry
-  erb :'inventory'
-end
-
-post 'users/signup' do
-  @user = User.new(
-  username: params[:username],
-  password: params[:password]
-  )
-  if @user.save
-    session[:id] = @user.id
-  else
-    @error = 'Invalid username or password'
+  def get_ingredients_id(recipe)
+    ingredients_ids = Ingredient.all.where(recipe_id: recipe.id)
   end
 end
 
@@ -59,6 +44,13 @@ post '/' do
     @error = 'Invalid username or password'
     erb :'/'
   end
+get '/' do
+  erb :index
+end
+
+get '/inventory' do
+  @items_list = open_pantry
+  erb :'/inventory'
 end
 
 post '/inventory/add' do
@@ -81,7 +73,12 @@ post '/inventory/create' do
   else
     @errors = "invalid inventory item"
   end
-  erb :index
+  erb :'index'
+end
+
+get '/recipes' do
+  @recipes = Recipe.all
+  erb :'recipes/index'
 end
 
 post '/recipes/create' do
@@ -101,5 +98,35 @@ post '/recipes/get' do
   @missing_ing = []
   @recipes.each do |recipe|
 
+  end
+end
+
+get 'users/signup' do
+  erb :'users/signup'
+end
+
+post 'users/signup' do
+  @user = User.new(
+  username: params[:username],
+  password: params[:password]
+  )
+  if @user.save
+    session[:id] = @user.id
+  else
+    @error = 'Invalid username or password'
+  end
+end
+
+get 'users/login' do
+  erb :'users/login'
+end
+
+post 'users/login' do
+  if @user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
+    session[:id] = @user.id
+    redirect '/'
+  else
+    @error = 'Invalid username or password'
+    erb :'users/login'
   end
 end
