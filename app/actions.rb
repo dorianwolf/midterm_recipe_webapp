@@ -16,7 +16,7 @@ helpers do
   end
 end
 
-get '/' do
+get '/' do #this is our login page
   erb :index
 end
 
@@ -32,10 +32,6 @@ end
 
 get 'users/signup' do
   erb :'users/signup'
-end
-
-get 'users/login' do
-  erb :'users/login'
 end
 
 get 'inventory' do
@@ -55,13 +51,13 @@ post 'users/signup' do
   end
 end
 
-post 'users/login' do
+post '/' do
   if @user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
     session[:id] = @user.id
-    redirect '/'
+    redirect '/inventory/index'
   else
     @error = 'Invalid username or password'
-    erb :'users/login'
+    erb :'/'
   end
 end
 
@@ -72,7 +68,7 @@ post '/inventory/add' do
   user_id: session[:id]
   )
   addition.save
-  erb :'/'
+  erb :'/inventory/index'
 end
 
 post '/inventory/create' do
@@ -81,7 +77,7 @@ post '/inventory/create' do
     link: params[:link]
   )
   if @inventory.save
-    redirect "/"
+    redirect "/inventory/index"
   else
     @errors = "invalid inventory item"
   end
@@ -94,7 +90,7 @@ post '/recipes/create' do
   link: params[:link]
   )
   if @recipe.save
-    redirect '/'
+    redirect '/inventory/index'
   else
     @errors = 'Could not save recipe. Please update and try again.'
   end

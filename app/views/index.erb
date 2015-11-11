@@ -1,1 +1,24 @@
+<% if @user && @user.errors.any? %>
+  <div>
+    <strong>Your input had the following issues:</strong>
+    <ul>
+      <% @user.errors.full_messages.each do |errormessage| %>
+      <li><%= errormessage %></li>
+      <%end%>
+    </ul>
+  </div>
+<% end %>
 <h1>Home Page</h1>
+<form mehtod="post" action = "/">
+  <div>
+    <label>User</label>
+    <input type="text" name="username">
+  </div>
+  <div>
+    <label>Enter Password:</label>
+    <input type="text" name="password">
+  </div>
+  <div>
+    <input type="submit" value="Submit">
+  </div>
+</form>
