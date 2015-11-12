@@ -29,32 +29,35 @@ inventory_fruits = ["mangoes", "oranges", "grapes", "pineapples", "bananas", "ap
 inventory_proteins = ["beef", "pork", "chicken", "turkey", "eggs", "milk", "beans"]
 
 inventory_carbs.each do |carb|
-  Inventory.create!(
+  Inventory.create(
     name: carb
   )
 end
 
 inventory_vegetables.each do |veggies|
-  Inventory.create!(
+  Inventory.create(
     name: veggies
   )
 end
 
 inventory_fruits.each do |fruit|
-  Inventory.create!(
+  Inventory.create(
     name: fruit
   )
 end
 
 inventory_proteins.each do |protein|
-  Inventory.create!(
+  Inventory.create(
     name: protein
   )
 end
+sandwich_recipe = Recipe.create(
+name: 'A Sandwich',
+link: 'https://www.youtube.com/watch?v=URvWSsAgtJE'
+)
 
-3.times do
-  Recipe.create!(
-    name: Faker::Book.title,
-    link: Faker::Internet.url('howtocook.com')
-  )
+ingredients = ['bread']
+
+ingredients.each do |ingredient|
+  add_ingredient(ingredient, sandwich_recipe.name)
 end

@@ -41,6 +41,7 @@ helpers do
     ingredients.each do |ingredient|
       missing << ingredient unless is_in_pantry(ingredient)
     end
+    binding.pry
     missing.length == 0
   end
 
@@ -56,7 +57,6 @@ get '/' do
 end
 
 get '/inventory' do
-  @items_list = open_pantry
   erb :'/inventory/index'
 end
 
