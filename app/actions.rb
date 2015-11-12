@@ -76,9 +76,10 @@ end
 
 post '/inventory/delete' do
   pantry = Pantry.where(user_id: session[:id])
-
   pantry.each do |item|
-    Pantry.find(item.id).destroy if Inventory.find(item.inventory_id).name == params[:name]
+    params[:items].each do |input, other_input|
+      Pantry.find(item.id).destroy if item.inventory_id == input.to_i
+    end
   end
   redirect '/inventory'
 end
