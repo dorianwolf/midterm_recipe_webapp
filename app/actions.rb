@@ -109,10 +109,11 @@ post '/users/signup' do
   )
   if @user.save
     session[:id] = @user.id
+    redirect '/inventory'
   else
     @error = 'Invalid username or password'
+    erb :'index'
   end
-  redirect '/'
 end
 
 post '/users/login' do
@@ -121,6 +122,6 @@ post '/users/login' do
     redirect '/inventory'
   else
     @error = 'Invalid username or password'
-    erb :'/'
+    erb :'index'
   end
 end
