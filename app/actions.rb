@@ -52,10 +52,13 @@ helpers do
 
 end
 
-
+before do
+  @flash = session[:flash]
+  session.delete(:flash)
+end
 
 get '/' do
-  erb :index
+  redirect '/inventory'
 end
 
 get '/inventory' do
@@ -74,6 +77,7 @@ post '/inventory/add' do
 end
 
 get '/recipes' do
+  #puts params.inspect
   @pantry = open_pantry
   erb :'recipes/index'
 end
@@ -84,10 +88,7 @@ get '/recipe/:id' do
 end
 
 post '/recipes/create' do
-  @recipe = Recipe.new(
-  name: params[:name],
-  link: params[:link]
-  )
+  @recipe = Recipe.new(params[:user])
   if @recipe.save
     redirect '/inventory/index'
   else
@@ -108,25 +109,29 @@ get '/users/signup' do
 end
 
 post '/users/signup' do
-  @user = User.new(
-  username: params[:username],
-  password: params[:password]
-  )
+  @user = User.new(params[:user])
   if @user.save
     session[:id] = @user.id
+    session[:flash] = "Thanks for joining, #{@user.username}"
     redirect '/inventory'
   else
-    @error = 'Invalid username or password'
+    @error = 'Invalid username or password' #TOFIX
     erb :'index'
   end
 end
 
 post '/users/login' do
-  if @user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
+  if @user = User.find_by_username(params[:user][:username]).try(:authenticate, params[:user][:password])
     session[:id] = @user.id
+    session[:flash] = "Hungry again? #{@user.username}"
     redirect '/inventory'
   else
-    @error = 'Invalid username or password'
+    @error = 'Invalid username or password' # TOFIX
     erb :'index'
   end
+end
+
+post '/users/logout' do
+  session.clear
+  redirect '/inventory'
 end

@@ -1,24 +1,9 @@
-<% if @user && @user.errors.any? %>
-  <div>
-    <strong>Your input had the following issues:</strong>
-    <ul>
-      <% @user.errors.full_messages.each do |errormessage| %>
-      <li><%= errormessage %></li>
-      <%end%>
-    </ul>
-  </div>
-<% end %>
-<h1>Home Page</h1>
-<form method="post" action = "/users/login">
-  <div>
-    <label>User</label>
-    <input type="text" name="username" placeholder="user name">
-  </div>
-  <div>
-    <label>Enter Password:</label>
-    <input type="password" name="password">
-  </div>
-  <div>
-    <input type="submit" value="Submit">
-  </div>
+<h1><%= @flash %>
+</h1>
+<h1>What do you have this time?</h1>
+<form action="/recipes" method="get">
+  <% Inventory.all.each do |item| %>
+  <input name="item" type="checkbox" value="<%= item.id %>"><%= item.name %><br>
+  <% end %>
+  <button type="submit">Go</button>
 </form>

@@ -1,0 +1,32 @@
+<div>
+  <!-- <% if @user && @user.errors.any? %>
+  <div>
+    <strong>Your input had the following issues:</strong>
+    <ul>
+      <% @user.errors.messages.each do |message| %>
+      <li><%= message %></li>
+      <%end%>
+    </ul>
+  </div>
+  <% end %> -->
+  <% if not logged_in %>
+    <form action="/users/login" method="post">
+      <div>
+        <label>Enter Username:</label>
+        <input name="user[username]" placeholder="Username" type="text">
+      </div>
+      <div>
+        <label>Enter Password:</label>
+        <input name="user[password]" placeholder="" type="password">
+      </div>
+      <div>
+        <input type="submit" value="login">
+      </div>
+    </form>
+    <a href="/users/signup">Sign up</a>
+  <% else %>
+    <form action="/users/logout" class="form-logout" method="post">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
+    </form>
+  <% end %>
+</div>

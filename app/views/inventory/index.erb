@@ -1,7 +1,9 @@
-<h1>What do you have</h1>
+<h1><%= @flash %>
+</h1>
+<h1>What do you have this time?</h1>
 <form action="/recipes" method="get">
   <% Inventory.all.each do |item| %>
-  <input name="item" type="checkbox" value="<%= item.id %>"><%= item.name %><br>
+  <input name="items[<%= item.id %>]" type="checkbox" value="<%= item.id %>"><%= item.name %><br>
   <% end %>
   <button type="submit">Go</button>
 </form>
