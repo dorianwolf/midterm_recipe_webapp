@@ -31,7 +31,11 @@ helpers do
   def is_in_pantry(ingredient_id)
     user = User.find(session[:id])
     pantry = Pantry.all.where(user_id: user.id)
-    return false unless pantry.find(ingredient_id)
+    if pantry.find_by(inventory_id: ingredient_id)
+      return true
+    else
+      return false
+    end
   end
 
   def has_all_ingredients(recipe)
@@ -39,7 +43,7 @@ helpers do
     ingredients = Ingredient.all.where(recipe_id: recipe.id)
     missing = []
     ingredients.each do |ingredient|
-      missing << ingredient unless is_in_pantry(ingredient)
+      missing << ingredient unless is_in_pantry(ingredient.inventory_id)
     end
     binding.pry
     missing.length == 0

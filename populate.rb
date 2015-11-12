@@ -12,6 +12,7 @@ require './app/models/recipe'
 require './config/environment'
 require './config/database'
 
+
 def add_ingredient(ingredient_name, recipe_name)
   addition = Ingredient.new(
   inventory_id: Inventory.find_by(name: ingredient_name).id,
@@ -19,6 +20,7 @@ def add_ingredient(ingredient_name, recipe_name)
   )
   addition.save
 end
+
 
 inventory_carbs = ["bread", "rice", "wheat", "flour"]
 
@@ -61,3 +63,16 @@ ingredients = ['bread']
 ingredients.each do |ingredient|
   add_ingredient(ingredient, sandwich_recipe.name)
 end
+
+@recipe1 =  Recipe.create(
+    name: Faker::Book.title,
+    link: Faker::Internet.url('howtocook.com')
+    )
+
+@item1 =  Inventory.create(name: Faker::Book.title)
+@item2 =  Inventory.create(name: Faker::Book.title)
+@item3 =  Inventory.create(name: Faker::Book.title)
+
+Ingredient.create(recipe_id: @recipe1.id, inventory_id: @item1.id)
+Ingredient.create(recipe_id: @recipe1.id, inventory_id: @item2.id)
+Ingredient.create(recipe_id: @recipe1.id, inventory_id: @item3.id)
