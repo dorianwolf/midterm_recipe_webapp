@@ -12,6 +12,14 @@ require './app/models/recipe'
 require './config/environment'
 require './config/database'
 
+def add_ingredient(ingredient_name, recipe_name)
+  addition = Ingredient.new(
+  inventory_id: Inventory.find_by(name: ingredient_name).id,
+  recipe_id: Recipe.find_by(name: recipe_name).id
+  )
+  addition.save
+end
+
 inventory_carbs = ["bread", "rice", "wheat", "flour"]
 
 inventory_vegetables = ["potatos", "onions", "garlic", "ginger", "lettuce", "kale", "mushrooms", "corn"]

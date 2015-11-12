@@ -31,18 +31,6 @@ helpers do
   #   end
   # end
 
-
-# =>      ADD INGREDIENTS TO RECIPE
-
-  def add_ingredient(ingredient_name, recipe_name)
-    addition = Ingredient.new(
-    inventory_id: Inventory.find_by(name: ingredient_name).id,
-    recipe_id: Recipe.find_by(name: recipe_name).id
-    )
-    addition.save
-  end
-
-
 # =>      CHECK TO SEE IF USER HAS THE INGREDIENTS
 
 
@@ -83,19 +71,6 @@ post '/inventory/add' do
   )
   addition.save
   erb :'/inventory/index'
-end
-
-post '/inventory/create' do
-  @inventory = Inventory.new(
-    name: params[:name],
-    link: params[:link]
-  )
-  if @inventory.save
-    redirect "/inventory/index"
-  else
-    @errors = "invalid inventory item"
-  end
-  erb :'index'
 end
 
 get '/recipes' do
