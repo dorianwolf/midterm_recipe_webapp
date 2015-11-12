@@ -3,7 +3,22 @@
 <h1>What do you have this time?</h1>
 <form action="/recipes" method="get">
   <% Inventory.all.each do |item| %>
-  <input name="items[<%= item.id %>]" type="checkbox" value="<%= item.id %>"><%= item.name %><br>
+    <% if logged_in %>
+      <% unless is_in_pantry(item.id) %>
+        <input name="items[<%= item.id %>]" type="checkbox" value="<%= item.id %>"><%= item.name %><br>
+      <% end %>
+    <% end %>
   <% end %>
   <button type="submit">Go</button>
+</form>
+<h1>Here's what you got already:</h1>
+<form action="/inventory/delete" method="post">
+  <% Inventory.all.each do |item| %>
+    <% if logged_in %>
+      <% if is_in_pantry(item.id) %>
+        <input name="items[<%= item.id %>]" type="checkbox" value="<%= item.id %>"><%= item.name %><br>
+      <% end %>
+    <% end %>
+  <% end %>
+  <button type="submit">Remove</button>
 </form>

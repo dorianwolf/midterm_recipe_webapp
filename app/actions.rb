@@ -2,15 +2,15 @@
 helpers do
 
   def logged_in
-    true if session[:id]
+    true if session[:id] != nil
   end
 
   def open_pantry
     if logged_in
-      items_id = Pantry.all.where(user_id: session[:id])
+      pantry = Pantry.all.where(user_id: session[:id])
       items = []
-      items_id.each do |item_id|
-        items << Inventory.find(item_id).name
+      pantry.each do |item|
+        items << Inventory.find(item.inventory_id).name
       end
       items
     end
@@ -18,14 +18,14 @@ helpers do
 
   def put_in_pantry(item_array)
     item_array.each do |item|
-      Pantry.create(
-      user_id: session[:id],
-      inventory_id: item
-      )
+      unless is_in_pantry(item)
+        Pantry.create(
+        user_id: session[:id],
+        inventory_id: item
+        )
+      end
     end
   end
-
-# =>      CHECK TO SEE IF USER HAS THE INGREDIENTS
 
 
   def is_in_pantry(ingredient_id)
@@ -45,7 +45,6 @@ helpers do
     ingredients.each do |ingredient|
       missing << ingredient unless is_in_pantry(ingredient.inventory_id)
     end
-    binding.pry
     missing.length == 0
   end
 
@@ -61,11 +60,12 @@ get '/' do
 end
 
 get '/inventory' do
+  @pantry = open_pantry if logged_in
   erb :'/inventory/index'
 end
 
 post '/inventory/add' do
-  item = Inventory.find_by(name: params(:name))
+  item = Inventory.find_by(name: params[:name])
   addition = Pantry.new(
   inventory_id: item.id,
   user_id: session[:id]
@@ -74,10 +74,20 @@ post '/inventory/add' do
   erb :'/inventory/index'
 end
 
+post '/inventory/delete' do
+  pantry = Pantry.where(user_id: session[:id])
+
+  pantry.each do |item|
+    Pantry.find(item.id).destroy if Inventory.find(item.inventory_id).name == params[:name]
+  end
+  redirect '/inventory'
+end
+
 get '/recipes' do
   #puts params.inspect
   @items = params[:items].keys
   put_in_pantry(@items)
+  @items = open_pantry
   @recipes = Recipe.all
   erb :'recipes/index'
 end
