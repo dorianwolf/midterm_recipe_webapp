@@ -15,26 +15,56 @@ helpers do
       items
     end
   end
+  #
+  # def pantry_name_to_id(pantry)
+  #   contents_ids = []
+  #   pantry.each do |item|
+  #     contents_ids << Inventory.find_by(name: item).id
+  #   end
+  #   contents_ids
+  # end
+  #
+  # def ingredient_id_to_name(ingredient_ids)
+  #   ingredient_names = []
+  #   ingredient_ids.each do |id|
+  #     ingredient_names << Inventory.find(id).name
+  #   end
+  # end
 
-  def pantry_name_to_id(pantry)
-    contents_ids = []
-    pantry.each do |item|
-      contents_ids << Inventory.find_by(name: item).id
+
+# =>      ADD INGREDIENTS TO RECIPE
+
+  def add_ingredient(ingredient_name, recipe_name)
+    addition = Ingredient.new(
+    inventory_id: Inventory.find_by(name: ingredient_name).id,
+    recipe_id: Recipe.find_by(name: recipe_name).id
+    )
+    addition.save
+  end
+
+
+# =>      CHECK TO SEE IF USER HAS THE INGREDIENTS
+
+
+  def is_in_pantry(ingredient_id)
+    user = User.find(session[:id])
+    pantry = Pantry.all.where(user_id: user.id)
+    return false unless pantry.find(ingredient_id)
+  end
+
+  def has_all_ingredients(recipe)
+    user = User.find(session[:id])
+    ingredients = Ingredient.all.where(recipe_id: recipe.id)
+    missing = []
+    ingredients.each do |ingredient|
+      missing << ingredient unless is_in_pantry(ingredient)
     end
-    contents_ids
+    missing.length == 0
   end
 
-  def ingredient_id_to_name(ingredient_ids)
-    ingredient_names = []
-    ingredient_ids.each do |id|
-      ingredient_names << Inventory.find(id).name
-    end
-  end
-
-  def get_ingredients_id(recipe)
-    ingredients_ids = Ingredient.all.where(recipe_id: recipe.id)
-  end
 end
+
+
 
 get '/' do
   erb :index
