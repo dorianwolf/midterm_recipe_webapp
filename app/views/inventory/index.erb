@@ -1,6 +1,6 @@
 <h1>What do you have</h1>
 <form action="/recipies" method="get">
-  <% @inventory.each do |item| %>
+  <% Inventory.all.each do |item| %>
   <input name="item" type="checkbox" value="<%= item.id %>"><%= item.name %><br>
   <% end %>
   <button type="submit">Go</button>

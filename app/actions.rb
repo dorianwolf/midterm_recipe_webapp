@@ -40,19 +40,9 @@ get '/' do
   erb :index
 end
 
-post '/' do
-  if @user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
-    session[:id] = @user.id
-    redirect '/inventory/index'
-  else
-    @error = 'Invalid username or password'
-    erb :'/'
-  end
-end
-
 get '/inventory' do
   @items_list = open_pantry
-  erb :'/inventory'
+  erb :'/inventory/index'
 end
 
 post '/inventory/add' do
@@ -122,18 +112,15 @@ post '/users/signup' do
   else
     @error = 'Invalid username or password'
   end
-end
-
-get '/users/login' do
-  erb :'/users/login'
+  redirect '/'
 end
 
 post '/users/login' do
   if @user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
     session[:id] = @user.id
-    redirect '/'
+    redirect '/inventory'
   else
     @error = 'Invalid username or password'
-    erb :'/users/login'
+    erb :'/'
   end
 end
