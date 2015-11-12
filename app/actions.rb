@@ -36,6 +36,10 @@ helpers do
   end
 end
 
+get '/' do
+  erb :index
+end
+
 post '/' do
   if @user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
     session[:id] = @user.id
@@ -44,9 +48,6 @@ post '/' do
     @error = 'Invalid username or password'
     erb :'/'
   end
-end
-get '/' do
-  erb :index
 end
 
 get '/inventory' do
@@ -82,6 +83,11 @@ get '/recipes' do
   erb :'recipes/index'
 end
 
+get '/recipe/:id' do
+  @review = Review.where(blah)
+  erb :'/recipe/display'
+end
+
 post '/recipes/create' do
   @recipe = Recipe.new(
   name: params[:name],
@@ -102,11 +108,11 @@ post '/recipes/get' do
   end
 end
 
-get 'users/signup' do
-  erb :'users/signup'
+get '/users/signup' do
+  erb :'/users/signup'
 end
 
-post 'users/signup' do
+post '/users/signup' do
   @user = User.new(
   username: params[:username],
   password: params[:password]
@@ -118,16 +124,16 @@ post 'users/signup' do
   end
 end
 
-get 'users/login' do
-  erb :'users/login'
+get '/users/login' do
+  erb :'/users/login'
 end
 
-post 'users/login' do
+post '/users/login' do
   if @user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
     session[:id] = @user.id
     redirect '/'
   else
     @error = 'Invalid username or password'
-    erb :'users/login'
+    erb :'/users/login'
   end
 end
