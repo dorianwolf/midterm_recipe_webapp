@@ -1,19 +1,21 @@
 <h1>Recipe matches for
-  <% @pantry.each do |ingredient| %>
-  <p><%= ingredient.name %></p>
+  <% @items.each do |item| %>
+  <p><%= Inventory.find(item).name %></p>
   <% end %>
 </h1>
 
 <hr/>
 
-<% @recipies.each do |recipe| %>
-<div class="recipe">
-  <h1>
-    <a href="/recipe/<%= recipe.id %>">
-      <%= recipie.name %></a>
-  </h1>
-  <p>
-    <a href="<%= recipe.link %>">How to</a>
-  </p>
-</div>
-<% end %>
+  <% @recipes.each do |recipe| %>
+    <% if has_all_ingredients(recipe) %>
+      <div class="recipe">
+        <h1>
+          <a href="/recipe/<%= recipe.id %>">
+              <%= recipe.name %></a>
+        </h1>
+        <p>
+          <a href="<%= recipe.link %>">How to</a>
+        </p>
+      </div>
+    <% end %>
+  <% end %>

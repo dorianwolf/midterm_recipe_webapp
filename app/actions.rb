@@ -15,21 +15,15 @@ helpers do
       items
     end
   end
-  #
-  # def pantry_name_to_id(pantry)
-  #   contents_ids = []
-  #   pantry.each do |item|
-  #     contents_ids << Inventory.find_by(name: item).id
-  #   end
-  #   contents_ids
-  # end
-  #
-  # def ingredient_id_to_name(ingredient_ids)
-  #   ingredient_names = []
-  #   ingredient_ids.each do |id|
-  #     ingredient_names << Inventory.find(id).name
-  #   end
-  # end
+
+  def put_in_pantry(item_array)
+    item_array.each do |item|
+      Pantry.create(
+      user_id: session[:id],
+      inventory_id: item
+      )
+    end
+  end
 
 # =>      CHECK TO SEE IF USER HAS THE INGREDIENTS
 
@@ -78,7 +72,9 @@ end
 
 get '/recipes' do
   #puts params.inspect
-  @pantry = open_pantry
+  @items = params[:items].keys
+  put_in_pantry(@items)
+  @recipes = Recipe.all
   erb :'recipes/index'
 end
 
