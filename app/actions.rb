@@ -44,6 +44,7 @@ post '/' do
     @error = 'Invalid username or password'
     erb :'/'
   end
+end
 get '/' do
   erb :index
 end

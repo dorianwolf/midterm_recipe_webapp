@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20151111203715) do
 
-
   create_table "ingredients", id: false, force: :cascade do |t|
     t.integer "inventory_id", null: false
     t.integer "recipe_id",    null: false
