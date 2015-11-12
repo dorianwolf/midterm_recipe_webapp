@@ -5,16 +5,16 @@ helpers do
     true if session[:id]
   end
 
-  # def open_pantry
-  #   if logged_in
-  #     items_id = Pantry.all.where(user_id: session[:id])
-  #     items = []
-  #     items_id.each do |item_id|
-  #       items << Inventory.find(item_id).name
-  #     end
-  #     items
-  #   end
-  # end
+  def open_pantry
+    if logged_in
+      items_id = Pantry.all.where(user_id: session[:id])
+      items = []
+      items_id.each do |item_id|
+        items << Inventory.find(item_id).name
+      end
+      items
+    end
+  end
   #
   # def pantry_name_to_id(pantry)
   #   contents_ids = []
@@ -36,7 +36,7 @@ helpers do
 
   def add_ingredient(ingredient_name, recipe_name)
     addition = Ingredient.new(
-    inventory_id: Inventory.find_by(name: ingredient_name).id
+    inventory_id: Inventory.find_by(name: ingredient_name).id,
     recipe_id: Recipe.find_by(name: recipe_name).id
     )
     addition.save
