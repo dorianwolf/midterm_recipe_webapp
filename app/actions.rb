@@ -70,7 +70,7 @@ before do
 end
 
 get '/' do
-  erb :index
+  redirect '/inventory'
 end
 
 get '/inventory' do
