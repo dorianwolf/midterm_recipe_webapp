@@ -38,14 +38,14 @@ helpers do
     end
   end
 
-  def has_all_ingredients(recipe)
+  def missing_ingredients(recipe)
     user = User.find(session[:id])
     ingredients = Ingredient.all.where(recipe_id: recipe.id)
     missing = []
     ingredients.each do |ingredient|
-      missing << ingredient unless is_in_pantry(ingredient.inventory_id)
+      missing << Inventory.find(ingredient.inventory_id).name unless is_in_pantry(ingredient.inventory_id)
     end
-    missing.length == 0
+    missing
   end
 
 end
@@ -109,9 +109,8 @@ end
 
 post '/recipes/get' do
   @recipes = Recipe.all
-  @missing_ing = []
+  @missing_ing = {}
   @recipes.each do |recipe|
-
   end
 end
 
