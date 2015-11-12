@@ -89,6 +89,7 @@ post '/inventory/add' do
 end
 
 get '/recipes' do
+  #puts params.inspect
   @pantry = open_pantry
   erb :'recipes/index'
 end
