@@ -69,7 +69,7 @@ post '/inventory/create' do
 end
 
 get '/recipes' do
-  @recipes = Recipe.all
+  @pantry = open_pantry
   erb :'recipes/index'
 end
 

@@ -1,5 +1,5 @@
 <h1>What do you have</h1>
-<form action="/recipies" method="get">
+<form action="/recipes" method="get">
   <% Inventory.all.each do |item| %>
   <input name="item" type="checkbox" value="<%= item.id %>"><%= item.name %><br>
   <% end %>

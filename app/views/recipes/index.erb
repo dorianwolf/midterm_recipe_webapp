@@ -1,5 +1,5 @@
 <h1>Recipe matches for
-  <% current_user.pantry.each do |ingredient| %>
+  <% @pantry.each do |ingredient| %>
   <p><%= ingredient.name %></p>
   <% end %>
 </h1>
