@@ -45,7 +45,7 @@ helpers do
     ingredients.each do |ingredient|
       missing << Inventory.find(ingredient.inventory_id).name unless is_in_pantry(ingredient.inventory_id)
     end
-    missing.length == 0
+    missing
   end
 
 end
@@ -85,9 +85,7 @@ post '/inventory/delete' do
 end
 
 get '/recipes' do
-  #puts params.inspect
-  @items = params[:items].keys
-  put_in_pantry(@items)
+  put_in_pantry(params[:pantry])
   @items = open_pantry
   @recipes = Recipe.all
   erb :'recipes/index'
