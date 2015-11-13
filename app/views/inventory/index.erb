@@ -4,10 +4,11 @@
 <form action="/recipes" method="get">
   <div class="btn-group btn-block" data-toggle="buttons">
     <% Inventory.all.each do |item| %>
-      <label class="btn btn-primary btn-block">
-        <input name="pantry[]" type="checkbox" value="<%= item.id %>" autocomplete="off"> <%= item.name %>
-      </label>
-      <br>
+      <% unless is_in_pantry(item.id) %>
+        <label class="btn btn-primary btn-block">
+          <input name="pantry[]" type="checkbox" value="<%= item.id %>" autocomplete="off"> <%= item.name %>
+        </label>
+      <% end %>
     <% end %>
   </div>
   <button type="submit" class="btn btn-default btn-block">Go</button>
@@ -26,5 +27,5 @@
       <% end %>
     <% end %>
   </div>
-  <button type="submit" class="btn btn-default btn-block">Go</button>
+  <button type="submit" class="btn btn-default btn-block">Remove</button>
 </form>

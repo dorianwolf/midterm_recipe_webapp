@@ -20,7 +20,7 @@
 
 <% @recipes.each do |recipe| %>
   <% missing = missing_ingredients(recipe)%>
-  <% if missing.length >= 1 %>
+  <% if missing.length == 1 %>
     <div class="recipe">
       <h1>
         <p>And you're some <%= missing[0] %> away from </p>
