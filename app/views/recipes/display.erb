@@ -1,13 +1,8 @@
-<h1>
-  Title:
-  <%= @recipe.name %>
-</h1>
-<ul>
+<table class="table table-striped">
+  <thead><%= @recipe.name %></thead>
+  <thead>Ingredients</thead>
   <% @recipe.ingredients.each do |ingredient| %>
-  <li><%= ingredient.name %></li>
+    <tr><%= ingredient.name %></tr>
   <% end %>
-</ul>
+</table>
 <a href="<%= @recipe.link %>">Instructions</a>
-</p>
-<% end %>
-<hr/>

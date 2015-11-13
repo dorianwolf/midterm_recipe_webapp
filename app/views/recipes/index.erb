@@ -4,18 +4,16 @@
   <% end %>
 <hr/>
 
-<% @recipes.each do |recipe| %>
-  <% if missing_ingredients(recipe).length == 0 %>
-    <div class="recipe">
-      <h1>
-        <a href="/recipe/<%= recipe.id %>">
-          <%= recipe.name %></a>
-      </h1>
-      <p>
-        <a href="<%= recipe.link %>">How to</a>
-      </p>
-    </div>
-  <% end %>
+<table class="table table-striped">
+  <tbody>
+    <% @recipes.each do |recipe| %>
+    <% if missing_ingredients(recipe).length == 0 %>
+      <tr>
+        <a href="/recipe/<%= recipe.id %>"><%= recipe.name %></a>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <% end %>
 
 <% @recipes.each do |recipe| %>
