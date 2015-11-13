@@ -45,7 +45,6 @@ helpers do
     ingredients.each do |ingredient|
       missing << ingredient unless is_in_pantry(ingredient.inventory_id)
     end
-    binding.pry
     missing.length == 0
   end
 
