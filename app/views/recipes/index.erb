@@ -1,7 +1,7 @@
 <h1>Recipe matches for</h1>
 <ul class="list-inline">
   <% @items.each do |item| %>
-    <h2><li><<%= Inventory.find(item).name.capitalize %></li></h2>
+    <li><h2><%= Inventory.find(item).name.capitalize %></h2></li>
   <% end %>
 </ul>
 <hr/>
@@ -9,13 +9,13 @@
 <table class="table table-striped">
   <tbody>
     <% @recipes.each do |recipe| %>
-      <% if missing_ingredients(recipe, @items).length == 0 %>
-        <tr>
-          <td>
-            <a href="/recipe/<%= recipe.id %>"><%= recipe.name %></a>
-          </td>
-        </tr>
-      <% end %>
+    <% if missing_ingredients(recipe, @items).length == 0 %>
+      <tr>
+        <td>
+          <a href="/recipe/<%= recipe.id %>"><%= recipe.name %></a>
+        </td>
+      </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>
