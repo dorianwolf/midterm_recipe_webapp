@@ -13,12 +13,21 @@ require './config/environment'
 require './config/database'
 
 
-def add_ingredient(ingredient_name, recipe_name)
-  addition = Ingredient.new(
+def add_ingredient(ingredient_name, recipe)
+  addition = Ingredient.create(
   inventory_id: Inventory.find_by(name: ingredient_name).id,
-  recipe_id: Recipe.find_by(name: recipe_name).id
+  recipe_id: recipe.id
   )
-  addition.save
+end
+
+def add_recipe(name, link, ingredients)
+  recipe = Recipe.create(
+  name: name,
+  link: link
+  )
+  ingredients.each do |ingredient|
+    add_ingredient(ingredient, recipe)
+  end
 end
 
 
@@ -26,7 +35,7 @@ inventory_carbs = ["bread", "rice", "wheat", "flour"]
 
 inventory_vegetables = ["potatos", "onions", "garlic", "ginger", "lettuce", "kale", "mushrooms", "corn"]
 
-inventory_fruits = ["mangoes", "oranges", "grapes", "pineapples", "bananas", "apples"]
+inventory_fruits = ["mangoes", "oranges", "grapes", "pineapples", "bananas", "apples", "tomatoes", "lemons", "limes"]
 
 inventory_proteins = ["beef", "pork", "chicken", "turkey", "eggs", "milk", "beans"]
 
@@ -53,26 +62,9 @@ inventory_proteins.each do |protein|
     name: protein
   )
 end
-sandwich_recipe = Recipe.create(
-name: 'A Sandwich',
-link: 'https://www.youtube.com/watch?v=URvWSsAgtJE'
-)
 
-ingredients = ['bread']
-
-ingredients.each do |ingredient|
-  add_ingredient(ingredient, sandwich_recipe.name)
-end
-
-@recipe1 =  Recipe.create(
-    name: Faker::Book.title,
-    link: Faker::Internet.url('howtocook.com')
-    )
-
-@item1 =  Inventory.create(name: Faker::Book.title)
-@item2 =  Inventory.create(name: Faker::Book.title)
-@item3 =  Inventory.create(name: Faker::Book.title)
-
-Ingredient.create(recipe_id: @recipe1.id, inventory_id: @item1.id)
-Ingredient.create(recipe_id: @recipe1.id, inventory_id: @item2.id)
-Ingredient.create(recipe_id: @recipe1.id, inventory_id: @item3.id)
+add_recipe("A Sandwich", "https://www.youtube.com/watch?v=URvWSsAgtJE", ['bread'])
+add_recipe("Breakfast", "http://www.jamieoliver.com/recipes/eggs-recipes/baked-eggs-lots-of-ways/#yVb19UTiEFbJ8qxD.97", ["eggs", "bread"])
+add_recipe("An Old Skool Meatball Sub", "http://www.jamieoliver.com/videos/gennaro-s-italian-meatball-sub-ft-jamie-oliver/#rQf0iAHGr9IXP8Fz.97", ["tomatoes", "bread", "beef", "eggs"])
+add_recipe("A Traditional Irish Stew", "https://www.youtube.com/watch?v=URvWSsAgtJE", ["onions", "carrots", "beef", "potatoes"])
+add_recipe("Grilled Chicken Salad", "http://www.cookstr.com/recipes/grilled-chicken-salad", ["lettuce", "chicken", "garlic", "limes", "onions"])

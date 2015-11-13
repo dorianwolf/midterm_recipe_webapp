@@ -12,3 +12,19 @@
   </div>
   <button type="submit" class="btn btn-default btn-block">Go</button>
 </form>
+
+<h1>Here's what you got already:</h1>
+<form action="/inventory/delete" method="post">
+  <div class="btn-group btn-block" data-toggle="buttons">
+    <% Inventory.all.each do |item| %>
+      <% if logged_in %>
+        <% if is_in_pantry(item.id) %>
+        <label class="btn btn-primary btn-block">
+          <input name="pantry[]" type="checkbox" value="<%= item.id %>" autocomplete="off"> <%= item.name %>
+        </label>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <button type="submit" class="btn btn-default btn-block">Go</button>
+</form>
