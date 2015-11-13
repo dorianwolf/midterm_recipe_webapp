@@ -12,8 +12,8 @@ get '/recipes' do
 end
 
 get '/recipe/:id' do
-  @review = Review.where(blah)
-  erb :'/recipe/display'
+  @recipe = Recipe.find(params[:id])
+  erb :'/recipes/display'
 end
 
 get '/recipe/all' do

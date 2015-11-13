@@ -1,10 +1,8 @@
-<%= erb :"shared/_errors", locals: {target: @recipe %>
-
-<table class="table table-striped">
-  <thead><%= @recipe.name %></thead>
-  <thead>Ingredients</thead>
-  <% @recipe.ingredients.each do |ingredient| %>
-    <tr><%= ingredient.name %></tr>
-  <% end %>
-</table>
-<a href="<%= @recipe.link %>">Instructions</a>
+<h1><%= @recipe.name %></h1>
+<h2>Ingredients</h2>
+<ul class="list-unstyled">
+<% @recipe.ingredients.each do |ingredient| %>
+  <li><h3><%= Inventory.find(ingredient.inventory_id).name.capitalize %><h3></li>
+</ul>
+<% end %>
+<h2><a href="<%= @recipe.link %>">How to</a></h2>
