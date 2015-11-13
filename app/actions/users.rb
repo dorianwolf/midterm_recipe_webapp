@@ -24,7 +24,7 @@ post '/users' do
     redirect '/inventory'
   else
     @error = 'Invalid username or password' #TOFIX
-    erb :'index'
+    erb :'inventory/index'
   end
 end
 
@@ -35,7 +35,7 @@ post '/users/login' do
     redirect '/inventory'
   else
     @error = 'Invalid username or password' # TOFIX
-    erb :'index'
+    erb :'inventory/index'
   end
 end
 

@@ -5,8 +5,8 @@ end
 
 get '/recipes' do
   #puts params.inspect
-  put_in_pantry(params[:pantry])
-  @items = open_pantry
+  #put_in_pantry(params[:pantry])
+  @items = params[:pantry]
   @recipes = Recipe.all
   erb :'recipes/index'
 end
