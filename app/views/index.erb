@@ -1,12 +1,14 @@
 <div class="alert alert-success" role="alert"><%= @flash %></div>
 <h1>What do you have this time?</h1>
-<form action="/recipes" method="get">
-  <% Inventory.all.each do |item| %>
-  <div class="checkbox">
-      <input name="<%= item.id %>" type="checkbox" value="<%= item.id %>" class="btn btn-default">
-      <label for="button"><%= item.name %></label>
 
+  <div class="btn-group btn-block" data-toggle="buttons">
+    <form action="/recipes" method="get">
+    <% Inventory.all.each do |item| %>
+      <label class="btn btn-primary btn-block">
+        <input name="pantry[]" type="checkbox" value="<%= item.id %>" autocomplete="off"> <%= item.name %>
+      </label>
+      <br/>
+    <% end %>
+    <button type="submit" class="btn btn-default">Go</button>
+    </form>
   </div>
-  <% end %>
-  <button type="submit" class="btn btn-default">Go</button>
-</form>

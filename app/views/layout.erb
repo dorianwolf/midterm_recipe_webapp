@@ -4,20 +4,9 @@
 <head>
   <link rel="stylesheet" href="/stylesheets/bootstrap.css">
   <link rel="stylesheet" href="/stylesheets/jumbotron.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
   <title>Recipie</title>
-  <style>
-      /*input[type=checkbox] {
-       position: absolute;
-       top: -9999px;
-       left: -9999px;
-    }
-    label {
-        display:inline-block;
-        background:#ccc;
-        margin:0 0 .5em 0;
-        padding:1em 2em;
-    }*/
-  </style>
 </head>
 
 <body>
@@ -26,17 +15,14 @@
       <nav class="navbar navbar-default">
         <%= erb :_user_bar  %>
       </nav>
-      <div class="jumbotron">
-        <%= yield %>
-      </div>
+    </div>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-        </div>
-      </div>
+    <div class="jumbotron">
+      <%= yield %>
+    </div>
 
-      <footer class="footer">
-        <p>&copy; Company 2014</p>
+    <footer class="footer">
+      <p>&copy; Company 2014</p>
     </footer>
   </div>
 </body>
