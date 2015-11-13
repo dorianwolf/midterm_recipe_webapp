@@ -98,6 +98,11 @@ get '/recipe/:id' do
   erb :'/recipe/display'
 end
 
+get '/recipe/all' do
+  @recipes = Recipe.all
+  redirect '/recipes/all'
+end
+
 post '/recipes/create' do
   @recipe = Recipe.new(params[:user])
   if @recipe.save
