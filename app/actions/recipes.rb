@@ -1,14 +1,19 @@
 before do
   @flash = session[:flash]
   session.delete(:flash)
-  erb :'index' unless current_user != nil
+  erb :'/inventory/index' unless current_user
 end
 
 get '/recipes' do
-  put_in_pantry(params[:pantry]) if params[:pantry]
+  put_in_pantry(params[:pantry]) if current_user
   @items = open_pantry
   @recipes = Recipe.all
   erb :'recipes/index'
+end
+
+get '/recipes/:id' do
+  @recipe = Recipe.find(params[:id])
+  erb :'/recipes/display'
 end
 
 get '/recipes/all' do

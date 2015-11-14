@@ -16,7 +16,7 @@ get '/users/signup' do
   erb :'/users/signup'
 end
 
-post '/users' do
+post '/users/signup' do
   @user = User.new(params[:user])
   if @user.save
     session[:id] = @user.id
@@ -24,7 +24,7 @@ post '/users' do
     redirect '/inventory'
   else
     @error = 'Invalid username or password' #TOFIX
-    erb :'index'
+    erb :'inventory/index'
   end
 end
 
@@ -35,7 +35,7 @@ post '/users/login' do
     redirect '/inventory'
   else
     @error = 'Invalid username or password' # TOFIX
-    erb :'index'
+    erb :'inventory/index'
   end
 end
 

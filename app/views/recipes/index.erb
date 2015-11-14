@@ -1,35 +1,36 @@
 <h1>Recipe matches for</h1>
+<ul class="list-inline">
   <% @items.each do |item| %>
-  <p><%= item %></p>
+    <li><h2><%= Inventory.find(item).name.capitalize %></h2></li>
   <% end %>
+</ul>
 <hr/>
 
-<% @recipes.each do |recipe| %>
-  <% if missing_ingredients(recipe).length == 0 %>
-    <div class="recipe">
-      <h1>
-        <a href="/recipes/<%= recipe.id %>">
-          <%= recipe.name %></a>
-      </h1>
-      <p>
-        <a href="<%= recipe.link %>">How to</a>
-      </p>
-    </div>
-  <% end %>
-<% end %>
+<table class="table table-striped">
+  <tbody>
+    <% @recipes.each do |recipe| %>
+    <% if missing_ingredients(recipe, @items).length == 0 %>
+      <tr>
+        <td>
+          <a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a>
+        </td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
 
-<% @recipes.each do |recipe| %>
-  <% missing = missing_ingredients(recipe)%>
-  <% if missing.length == 1 %>
-    <div class="recipe">
-      <h1>
-        <p>And you're some <%= missing[0] %> away from </p>
-        <a href="/recipes/<%= recipe.id %>">
-          <%= recipe.name %></a>
-      </h1>
-      <p>
-        <a href="<%= recipe.link %>">How to</a>
-      </p>
-    </div>
-  <% end %>
-<% end %>
+<table class="table table-striped">
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <% missing = missing_ingredients(recipe, @items)%>
+      <% if missing.length == 1 %>
+        <tr>
+          <td>
+            <a href="/recipes/<%= recipe.id %>"><p>And you're some <%= missing[0] %> away from <%= recipe.name %></a>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

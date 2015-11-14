@@ -1,11 +1,8 @@
-<h1>
-  <%= @recipe.name %>
-</h1>
-<ul>
-  <% Ingredient.where(recipe_id: @recipe.id).each do |ingredient| %>
-  <li><%= Inventory.find(ingredient.inventory_id).name %></li>
-  <% end %>
+<h1><%= @recipe.name %></h1>
+<h2>Ingredients</h2>
+<ul class="list-unstyled">
+<% @recipe.ingredients.each do |ingredient| %>
+  <li><h3><%= Inventory.find(ingredient.inventory_id).name.capitalize %><h3></li>
 </ul>
-<a href="<%= @recipe.link %>">Instructions</a>
-</p>
-<hr/>
+<% end %>
+<h2><a href="<%= @recipe.link %>">How to</a></h2>

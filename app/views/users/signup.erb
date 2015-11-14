@@ -1,13 +1,13 @@
-<form action="/users" method="post">
-  <div>
-    <label>Enter Username:</label>
-    <input name="user[username]" placeholder="Username" type="text">
+<%= erb :"shared/_errors", locals: {target: @user} %>
+
+<form action="/users/signup" method="POST" class="form-horizontal">
+  <div class="form-group">
+    <h3><label for="username">Username</label></h3>
+    <input name="user[username]" type="text" class="form-control input-lg" placeholder="Name" autofocus="true">
   </div>
-  <div>
-    <label>Enter Password:</label>
-    <input name="user[password]" placeholder="password" type="password">
+  <div class="form-group">
+    <h3><label for="exampleInputPassword1">Password</label></h3>
+    <input name="user[password]" type="password" class="form-control input-lg" placeholder="Password">
   </div>
-  <div>
-    <input type="submit" value="sign up">
-  </div>
+  <button type="submit" class="btn btn-success">Submit</button>
 </form>

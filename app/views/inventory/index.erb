@@ -1,5 +1,9 @@
-<h1><%= @flash %>
-</h1>
+<% if @flash %>
+  <div class="alert alert-success" role="alert">
+    <%= @flash %>
+  </div>
+<% end %>
+
 <h1>What do you have this time?</h1>
 <form action="/recipes" method="get">
   <div class="btn-group btn-block" data-toggle="buttons">
@@ -8,6 +12,9 @@
         <label class="btn btn-primary btn-block">
           <input name="pantry[]" type="checkbox" value="<%= item.id %>" autocomplete="off"> <%= item.name %>
         </label>
+        <% unless current_user && is_in_pantry(item.id) %>
+          <%= erb :"inventory/_pantry_checkbox", locals: {item: item} %>
+        <% end %>
       <% end %>
     <% end %>
   </div>
@@ -15,14 +22,12 @@
 </form>
 
 <% if current_user %>
-<h1>Here's what you got already:</h1>
+  <h1>Here's what you got already:</h1>
   <form action="/inventory/delete" method="post">
     <div class="btn-group btn-block" data-toggle="buttons">
       <% Inventory.all.each do |item| %>
         <% if is_in_pantry(item.id) %>
-        <label class="btn btn-primary btn-block">
-          <input name="pantry[]" type="checkbox" value="<%= item.id %>" autocomplete="off"> <%= item.name %>
-        </label>
+          <%= erb :"inventory/_pantry_checkbox", locals: {item: item} %>
         <% end %>
       <% end %>
     </div>
