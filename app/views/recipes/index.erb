@@ -8,7 +8,7 @@
   <% if missing_ingredients(recipe).length == 0 %>
     <div class="recipe">
       <h1>
-        <a href="/recipe/<%= recipe.id %>">
+        <a href="/recipes/<%= recipe.id %>">
           <%= recipe.name %></a>
       </h1>
       <p>
@@ -24,7 +24,7 @@
     <div class="recipe">
       <h1>
         <p>And you're some <%= missing[0] %> away from </p>
-        <a href="/recipe/<%= recipe.id %>">
+        <a href="/recipes/<%= recipe.id %>">
           <%= recipe.name %></a>
       </h1>
       <p>

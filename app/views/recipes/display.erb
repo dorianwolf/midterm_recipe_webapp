@@ -1,13 +1,11 @@
 <h1>
-  Title:
   <%= @recipe.name %>
 </h1>
 <ul>
-  <% @recipe.ingredients.each do |ingredient| %>
-  <li><%= ingredient.name %></li>
+  <% Ingredient.where(recipe_id: @recipe.id).each do |ingredient| %>
+  <li><%= Inventory.find(ingredient.inventory_id).name %></li>
   <% end %>
 </ul>
 <a href="<%= @recipe.link %>">Instructions</a>
 </p>
-<% end %>
 <hr/>

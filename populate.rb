@@ -25,7 +25,6 @@ def add_recipe(name, link, ingredients)
   name: name,
   link: link
   )
-  binding.pry
   ingredients.each do |ingredient|
     add_ingredient(ingredient, recipe)
   end

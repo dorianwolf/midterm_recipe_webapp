@@ -4,7 +4,7 @@
 <form action="/recipes" method="get">
   <div class="btn-group btn-block" data-toggle="buttons">
     <% Inventory.all.each do |item| %>
-      <% unless is_in_pantry(item.id) %>
+      <% unless current_user && is_in_pantry(item.id) %>
         <label class="btn btn-primary btn-block">
           <input name="pantry[]" type="checkbox" value="<%= item.id %>" autocomplete="off"> <%= item.name %>
         </label>
@@ -14,18 +14,18 @@
   <button type="submit" class="btn btn-default btn-block">Go</button>
 </form>
 
+<% if current_user %>
 <h1>Here's what you got already:</h1>
-<form action="/inventory/delete" method="post">
-  <div class="btn-group btn-block" data-toggle="buttons">
-    <% Inventory.all.each do |item| %>
-      <% if logged_in %>
+  <form action="/inventory/delete" method="post">
+    <div class="btn-group btn-block" data-toggle="buttons">
+      <% Inventory.all.each do |item| %>
         <% if is_in_pantry(item.id) %>
         <label class="btn btn-primary btn-block">
           <input name="pantry[]" type="checkbox" value="<%= item.id %>" autocomplete="off"> <%= item.name %>
         </label>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <button type="submit" class="btn btn-default btn-block">Remove</button>
-</form>
+    </div>
+    <button type="submit" class="btn btn-default btn-block">Remove</button>
+  </form>
+<% end %>

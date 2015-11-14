@@ -20,7 +20,7 @@ configure do
 
   enable :sessions
   set :session_secret, ENV['SESSION_KEY'] || 'lighthouselabssecret'
-
+  use Rack::MethodOverride
   set :views, File.join(Sinatra::Application.root, "app", "views")
 end
 

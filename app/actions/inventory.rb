@@ -4,7 +4,7 @@ before do
 end
 
 get '/inventory' do
-  @pantry = open_pantry if logged_in
+  @pantry = open_pantry if current_user != nil
   erb :'/inventory/index'
 end
 
