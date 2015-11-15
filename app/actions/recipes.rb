@@ -1,6 +1,10 @@
 get '/recipes' do
-  put_in_pantry(params[:pantry]) if current_user
-  @items = open_pantry
+  if current_user
+    put_in_pantry(params[:pantry]) if params[:pantry]
+    @items = open_pantry
+  else
+    @items = params[:pantry]
+  end
   @recipes = Recipe.all
   erb :'recipes/index'
 end

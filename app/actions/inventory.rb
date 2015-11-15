@@ -1,7 +1,3 @@
-before '/inventory' do
-  redirect '/users/signup' unless current_user
-end
-
 get '/inventory' do
   @pantry = open_pantry if current_user != nil
   erb :'/inventory/index'
