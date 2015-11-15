@@ -1,9 +1,3 @@
-before do
-  @flash = session[:flash]
-  session.delete(:flash)
-  erb :'/inventory/index' unless current_user
-end
-
 get '/recipes' do
   put_in_pantry(params[:pantry]) if current_user
   @items = open_pantry

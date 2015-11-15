@@ -1,7 +1,5 @@
 before '/inventory' do
   redirect '/users/signup' unless current_user
-  @flash = session[:flash]
-  session.delete(:flash)
 end
 
 get '/inventory' do

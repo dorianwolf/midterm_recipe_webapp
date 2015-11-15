@@ -1,8 +1,3 @@
-before do
-  @flash = session[:flash]
-  session.delete(:flash)
-end
-
 get '/profile' do
   # show the profile
   erb :'users/profile'
