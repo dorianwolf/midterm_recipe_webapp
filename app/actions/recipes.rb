@@ -1,8 +1,3 @@
-before do
-  @flash = session[:flash]
-  session.delete(:flash)
-end
-
 get '/recipes' do
   #puts params.inspect
   #put_in_pantry(params[:pantry])

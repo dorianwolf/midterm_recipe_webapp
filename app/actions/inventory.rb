@@ -1,8 +1,3 @@
-before do
-  @flash = session[:flash]
-  session.delete(:flash)
-end
-
 get '/inventory' do
   @pantry = open_pantry if logged_in
   erb :'/inventory/index'

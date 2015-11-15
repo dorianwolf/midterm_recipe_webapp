@@ -1,8 +1,3 @@
-before do
-  @flash = session[:flash]
-  session.delete(:flash)
-end
-
 get '/profile' do
   # show the profile
   erb :'users/profile'
@@ -16,7 +11,7 @@ get '/users/signup' do
   erb :'/users/signup'
 end
 
-post '/users' do
+post '/users/signup' do
   @user = User.new(params[:user])
   if @user.save
     session[:id] = @user.id
