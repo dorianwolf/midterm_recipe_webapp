@@ -69,3 +69,8 @@ add_recipe("Breakfast", "http://www.jamieoliver.com/recipes/eggs-recipes/baked-e
 add_recipe("An Old Skool Meatball Sub", "http://www.jamieoliver.com/videos/gennaro-s-italian-meatball-sub-ft-jamie-oliver/#rQf0iAHGr9IXP8Fz.97", ["tomatoes", "bread", "beef", "eggs"])
 add_recipe("A Traditional Irish Stew", "https://www.youtube.com/watch?v=URvWSsAgtJE", ["potatos", "onions", "beef", "carrots"])
 add_recipe("Grilled Chicken Salad", "http://www.cookstr.com/recipes/grilled-chicken-salad", ["lettuce", "chicken", "garlic", "limes", "onions"])
+add_recipe("Apple Curry Turkey Pita", "http://allrecipes.com/recipe/99873/apple-curry-turkey-pita/", ["onions", "lemons", "turkey", "wheat", "apples", "milk"])
+add_recipe("Mushroom", "http://allrecipes.com/recipe/14746/mushroom-pork-chops/", ["pork", "onions", "mushrooms"])
+add_recipe("Yummy Mango-Banana Milkshake", "http://allrecipes.com/recipe/158712/yummy-mango-banana-milkshake/", ["mangoes", "bananas", "milk"])
+add_recipe("Classic Omelette", "http://www.epicurious.com/recipes/food/views/classic-omelette-15068", ["eggs", "milk"])
+add_recipe("Spicy Mango Salad", "http://allrecipes.com/recipe/85165/spicy-mango-salad/", ["mangoes", "limes"])
