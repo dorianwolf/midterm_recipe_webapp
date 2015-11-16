@@ -26,6 +26,16 @@
   </div>
 <% else %>
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.username %> <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">History</a></li>
+          <li><a href="#">Recipes</a></li>
+          <li><a href="#">Something else</a></li>
+        </ul>
+      </li>
+  </ul>
     <form action="/users/logout" class="navbar-form navbar-right" id="signin" method="post" role="form">
       <button class="btn btn-danger" type="submit">Logout</button>
     </form>

@@ -1,22 +1,8 @@
-<h1>What do you have this time?</h1>
-<form action="/recipes" method="get">
-  <div class="btn-group btn-block" data-toggle="buttons">
-    <% Inventory.all.each do |item| %>
-      <% unless current_user && is_in_pantry(item.id) %>
-        <label class="btn btn-primary btn-block">
-          <input name="pantry[]" type="checkbox" value="<%= item.id %>" autocomplete="off"> <%= item.name %>
-        </label>
-        <% unless current_user && is_in_pantry(item.id) %>
-          <%= erb :"inventory/_pantry_checkbox", locals: {item: item} %>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
-  <button type="submit" class="btn btn-default btn-block">Go</button>
-</form>
+<h1>What's in your kitchen?</h1>
 
-<% if current_user %>
-  <h1>Here's what you got already:</h1>
+<% if current_user && open_pantry.length > 0 %>
+  <h2>Here's what you got already:</h2>
+  <br />
   <form action="/inventory/delete" method="post">
     <div class="btn-group btn-block" data-toggle="buttons">
       <% Inventory.all.each do |item| %>
@@ -27,4 +13,17 @@
     </div>
     <button type="submit" class="btn btn-default btn-block">Remove</button>
   </form>
+  <hr />
 <% end %>
+
+<h2>Select to add:</h2>
+<form action="/recipes" method="get">
+  <div class="btn-group btn-block" data-toggle="buttons">
+    <% Inventory.all.each do |item| %>
+      <% unless current_user && is_in_pantry(item.id) %>
+        <%= erb :"inventory/_pantry_checkbox", locals: {item: item} %>
+      <% end %>
+    <% end %>
+  </div>
+  <button type="submit" class="btn btn-default btn-block">Go</button>
+</form>

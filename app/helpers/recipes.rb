@@ -8,8 +8,7 @@ helpers do
   def open_pantry
     return unless current_user
     pantry = Pantry.all.where(user_id: session[:id])
-    items = []
-    Pantry.where(user_id: session[:id]).map { |item| Inventory.find(item.inventory_id)}
+    items = Pantry.where(user_id: session[:id]).map { |item| Inventory.find(item.inventory_id)}
   end
 
   # def open_pantry
