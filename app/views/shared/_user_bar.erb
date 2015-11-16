@@ -1,4 +1,4 @@
-<% unless current_user %>
+<% unless current_user.username != 'tourist' %>
 
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <%if @ingredients_link %>

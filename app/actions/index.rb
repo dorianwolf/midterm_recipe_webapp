@@ -3,5 +3,6 @@ get '/' do
   username: 'tourist',
   password: 'password'
   )
+  session[:id] = @user.id
   redirect '/inventory'
 end
