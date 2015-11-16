@@ -1,4 +1,4 @@
-<h1><%= @recipe.name %></h1>
+<a href="<%= @recipe.link %>"><h1><%= @recipe.name %></h1></a>
 <h2>Ingredients</h2>
 <ul class="list-unstyled">
 <% @recipe.ingredients.each do |ingredient| %>
@@ -6,6 +6,5 @@
 </ul>
 <% end %>
 <p>Tilde microdosing blog cliche meggings. Intelligentsia five dollar toast forage yuccie. Master kitsch knausgaard. Try-hard everyday trust fund mumblecore.", "Normcore viral pickled. Listicle humblebrag swag tote bag. Taxidermy street hammock neutra butcher cred kale chips. Blog portland humblebrag trust fund irony.", "Single-origin coffee fixie cleanse tofu xoxo. Post-ironic tote bag ramps gluten-free locavore mumblecore hammock. Umami loko twee. Ugh kitsch before they sold out.</p>
-<h2><a href="<%= @recipe.link %>">How to</a></h2>
 <hr>
 <h4><a onclick="window.history.back()">I'll try something else</a></h4>

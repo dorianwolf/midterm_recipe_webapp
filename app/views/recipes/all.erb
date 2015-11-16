@@ -1,10 +1,11 @@
-<% Recipe.each do |recipe| %>
-  <h1><%= recipe.name %></h1>
-  <h2>Ingredients</h2>
+<h1>RECIPES</h1>
+<h1>* * * * * *</h1>
+<% @recipes.each do |recipe| %>
+  <h1><a href="<%=recipe.link%>"><%= recipe.name %></a></h1>
   <ul class="list-unstyled">
   <% recipe.ingredients.each do |ingredient| %>
     <li><h3><%= Inventory.find(ingredient.inventory_id).name %><h3></li>
   </ul>
   <% end %>
-  <h2><a href="<%= recipe.link %>">How to</a></h2>
+  <h2> ________ </h2>
 <% end %>

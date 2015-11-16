@@ -1,4 +1,4 @@
-<h1>Recipe matches for</h1>
+<h1>Here's what you can make with:</h1>
 <ul class="list-inline">
   <% @items.each do |item| %>
     <li><h2><%= Inventory.find(item).name.capitalize %></h2></li>
@@ -8,14 +8,18 @@
 
 <table class="table table-striped">
   <tbody>
+    <% count = 0 %>
     <% @recipes.each do |recipe| %>
       <% if missing_ingredients(recipe, @items).length == 0 %>
-        <tr>
+        <tr> <% count += 1%>
           <td>
             <h3><a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a></h3>
           </td>
         </tr>
       <% end %>
+    <% end %>
+    <% if count == 0 %>
+      <h3><a href='http://ubereats.com/eats/toronto/'>Nothing.</a></h3>
     <% end %>
   </tbody>
 </table>
@@ -29,7 +33,7 @@
       <% if missing.length == 1 %>
         <tr>
           <td>
-            <a href="/recipes/<%= recipe.id %>"><h3>And you're some <%= missing.first %> away from <%= recipe.name %></h3>
+            <h3>and if you got some <%= missing.first %>, you could make some <a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a></h3>
           </td>
         </tr>
       <% end %>
