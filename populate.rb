@@ -69,3 +69,6 @@ add_recipe("Breakfast", "http://www.jamieoliver.com/recipes/eggs-recipes/baked-e
 add_recipe("An Old Skool Meatball Sub", "http://www.jamieoliver.com/videos/gennaro-s-italian-meatball-sub-ft-jamie-oliver/#rQf0iAHGr9IXP8Fz.97", ["tomatoes", "bread", "beef", "eggs"])
 add_recipe("A Traditional Irish Stew", "https://www.youtube.com/watch?v=URvWSsAgtJE", ["potatos", "onions", "beef", "carrots"])
 add_recipe("Grilled Chicken Salad", "http://www.cookstr.com/recipes/grilled-chicken-salad", ["lettuce", "chicken", "garlic", "limes", "onions"])
+add_recipe("Some Untraditional Stew", "#", ['potatos', 'garlic', 'mushrooms', 'tomatoes', 'mangoes' ])
+add_recipe("Orange Juice", "#", ['oranges'])
+add_recipe("A Turkey Burger", "#", ['turkey', 'onions', 'tomatoes', 'lettuce', 'bread'])

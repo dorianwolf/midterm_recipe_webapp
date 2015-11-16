@@ -1,6 +1,11 @@
-<% if not current_user %>
+<% unless current_user %>
 
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <%if @ingredients_link %>
+      <form action='/inventory' method='get' name='inventory'>
+        <button class='btn btn-primary' type='submit'><%= @ingredients_link %></button>
+      </form>
+    <% end %>
     <form action="/users/login" class="navbar-form navbar-left" id="signin" method="post" name="signin" role="form">
 
       <div class="input-group">

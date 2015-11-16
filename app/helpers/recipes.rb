@@ -34,8 +34,7 @@ helpers do
 
 
   def is_in_pantry(ingredient_id)
-    user = current_user
-    pantry = Pantry.all.where(user_id: user.id)
+    pantry = Pantry.all.where(user_id: current_user.id)
     if pantry.find_by(inventory_id: ingredient_id)
       return true
     else

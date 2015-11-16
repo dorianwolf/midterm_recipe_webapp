@@ -1,9 +1,10 @@
 before '/inventory' do
   redirect '/users/signup' unless current_user
+  @ingredients_link = false
 end
 
 get '/inventory' do
-  @pantry = open_pantry if current_user != nil
+  @pantry = open_pantry
   erb :'/inventory/index'
 end
 
